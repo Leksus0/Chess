@@ -1,0 +1,58 @@
+//вариант А
+    //1.1.1 - куда делаешь ход, там пусто?
+        //1.1.1.1 - если да, можно ли так этой фигуре ходить?
+        //1.1.1.2 - если нет, ты делаешь удар на противника, который может делать эта фигура?
+
+if (move.figure == '♚') did_the_kings_move[0] = true;
+            if (move.figure == '♔') did_the_kings_move[1] = true;
+
+            if (move.figure == '♜') {
+                if (move.i_now == 7 && move.j_now == 0) did_the_rooks_move[0] = true;
+                if (move.i_now == 7 && move.j_now == 7) did_the_rooks_move[1] = true;
+            }
+            if (move.figure == '♖') {
+                if (move.i_now == 0 && move.j_now == 0) did_the_rooks_move[2] = true;
+                if (move.i_now == 0 && move.j_now == 7) did_the_rooks_move[3] = true;
+            }
+
+
+    boolean [] did_the_rooks_move; //a1, h1, a8, h8
+    boolean [] did_the_kings_move; //white, black
+
+
+
+
+        //Алгоритм:
+        //-2 - не ходит ли фигура сама в себя?
+        //-1 - в рамках границ игрового поля?
+        //0 - такая фигура действительно стоит на этом месте?
+        //1 - можно ли такой фигуре так ходить?
+            //1.1 - если фигура пешка:
+                //1.1.1 - она бьёт
+                //1.1.2 - она ходит
+                //1.1.3 - она делает взятие на проходе
+            //1.2 - если фигура король:
+                //1.2.1 - он бьёт или ходит (без разницы)
+                //1.2.2 - он делает рокировку
+            //1...
+            //1.6 - если фигура ладья...
+        //2 - делаешь ход НЕ на свои фигуры?
+        //3 - при ходе, НЕ получает ли текущий игрок себе шах?
+        //4 - если шах есть сейчас, данный ход его нейтрализует?
+        //или
+        //3,4 - если сделать ход, то игроку не будет шаха
+
+
+
+            if (length_move == 1) {
+                if (move.player == 'w') return direction_move == -1;
+                if (move.player == 'b') return direction_move == 1;
+            }
+            if (length_move == 2) {
+                if (move.player == 'w') return direction_move == -2 && move.coord_now.i == 6; // ток с нач. позиции
+                if (move.player == 'b') return direction_move == 2 && move.coord_now.i == 1;
+            }
+            if (length_move == Math.sqrt(2)) {
+                if (move.player == 'w') return direction_move == -1;
+                if (move.player == 'b') return direction_move == 1;
+            }
